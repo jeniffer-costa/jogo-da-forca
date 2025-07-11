@@ -1,8 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class HagmanGame {
@@ -24,9 +21,9 @@ public class HagmanGame {
         System.out.println("Olá " + playerName + " Bem vindo(a) ao JOGO DA FORCA! ");
         System.out.println("Você tem " + player.life + " para acertar a palavra secreta.");
 
-        secretWord.printHiddenWord(wordSelected);
+        char[] hideWord = secretWord.printHiddenWord(wordSelected);
 
-        while (player.life > 0) {
+        while (!hasPlayerWon(hideWord, wordSelected) && !hasPlayerLost(player.life)){
             System.out.print("Entre com uma letra: ");
             char letter = scanner.nextLine().charAt(0);
             if (secretWord.updateHiddenWord(letter, wordSelected) == false){
@@ -36,5 +33,36 @@ public class HagmanGame {
             System.out.println("Chances Restantes: " + player.life);
             System.out.println("");
         }
+        
+        if(hasPlayerLost(player.life) == true){
+            System.out.println("");
+            System.out.println("GAME OVER !");
+            System.out.println("");
+        }
+        else if (hasPlayerWon(hideWord,wordSelected) == true){
+            System.out.println("");
+            System.out.println("YOU WIN !");
+            System.out.println("");
+        }
+    }
+
+    public boolean hasPlayerWon(char[] hideWord, String wordSelected){
+        boolean win;
+        String hideWordString = new String(hideWord);
+        if(hideWordString.equals(wordSelected)){
+            win = true;
+        }
+        else{
+            win = false;
+        }
+        return win;
+    }
+
+    public boolean hasPlayerLost(int life){
+        boolean lost = false;
+        if (life == 0){
+            lost = true;
+        }
+        return lost;
     }
 }
