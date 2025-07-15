@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class SecretWord {
     Random random = new Random();
     char[] hideWord;
+    List<Character> letters = new ArrayList<>();
 
     public SecretWord(){
     }
@@ -53,8 +54,22 @@ public class SecretWord {
                 findLetter = true;
             }
         }
+        if(letters.contains(letter)){
+            System.out.println("Você já digitou essa letra, tente outra! ");
+        }
+        else{
+            letters.add(letter);
+        }
         System.out.print(hideWord);
         System.out.println("");
         return findLetter;
+    }
+
+    public void printGuessedLetters(){
+        System.out.print("Letras já informadas: ");
+        for (char c : letters) {
+            System.out.print(Character.toUpperCase(c) + " - ");
+        }
+        System.out.println(" ");
     }
 }

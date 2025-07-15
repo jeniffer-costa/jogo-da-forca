@@ -24,6 +24,7 @@ public class HagmanGame {
         char[] hideWord = secretWord.printHiddenWord(wordSelected);
 
         while (!hasPlayerWon(hideWord, wordSelected) && !hasPlayerLost(player.life)){
+            System.out.println("");
             System.out.print("Entre com uma letra: ");
             char letter = scanner.nextLine().charAt(0);
             if (secretWord.updateHiddenWord(letter, wordSelected) == false){
@@ -31,7 +32,7 @@ public class HagmanGame {
             }
             System.out.println("");
             System.out.println("Chances Restantes: " + player.life);
-            System.out.println("");
+            secretWord.printGuessedLetters();
         }
         
         if(hasPlayerLost(player.life) == true){
